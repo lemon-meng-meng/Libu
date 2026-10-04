@@ -1,0 +1,157 @@
+:root {
+  --bg-a: #0a1230;
+  --bg-b: #16124a;
+  --bg-c: #1d3a63;
+  --fg: #eef3ff;
+  --fg-dim: rgba(238, 243, 255, 0.66);
+  --accent: #6ea8ff;
+  --accent-2: #7cf0c8;
+  --danger: #ff6b81;
+  --card-radius: 22px;
+  --sidebar-w: 84px;
+  font-family: 'Noto Sans CJK SC', 'Source Han Sans SC', 'HarmonyOS Sans SC',
+    'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------------- 渐变底色预设（暗色） ---------------- */
+html[data-bg='aurora-blue'] {
+  --bg-a: #0a1230; --bg-b: #16124a; --bg-c: #1d3a63;
+}
+html[data-bg='midnight-purple'] {
+  --bg-a: #0b0a24; --bg-b: #241147; --bg-c: #3b1d6e;
+}
+html[data-bg='sunset-rose'] {
+  --bg-a: #2a0f2e; --bg-b: #4a1640; --bg-c: #7a2a4d;
+}
+html[data-bg='emerald-night'] {
+  --bg-a: #06231f; --bg-b: #0b3a33; --bg-c: #14534a;
+}
+html[data-bg='graphite'] {
+  --bg-a: #0d0f14; --bg-b: #1a1f2b; --bg-c: #2b3242;
+}
+html[data-bg='dawn'] {
+  --bg-a: #241033; --bg-b: #4a2140; --bg-c: #8a4a45;
+}
+html[data-bg='ocean'] {
+  --bg-a: #061a2e; --bg-b: #0b2f4a; --bg-c: #125a72;
+}
+html[data-bg='forest'] {
+  --bg-a: #0a1f12; --bg-b: #123a24; --bg-c: #1f5a37;
+}
+
+/* ---------------- 主题前景色 ---------------- */
+[data-theme='light'] {
+  --fg: #17203a;
+  --fg-dim: rgba(23, 32, 58, 0.62);
+  --accent: #2f6bff;
+  --accent-2: #0aa374;
+  --danger: #e23a5a;
+}
+
+/* ---------------- 渐变底色预设（亮色） ---------------- */
+html[data-theme='light'][data-bg='aurora-blue'] {
+  --bg-a: #dbe7ff; --bg-b: #eef2ff; --bg-c: #f7e9ff;
+}
+html[data-theme='light'][data-bg='midnight-purple'] {
+  --bg-a: #e8e2ff; --bg-b: #f2ecff; --bg-c: #f7e9ff;
+}
+html[data-theme='light'][data-bg='sunset-rose'] {
+  --bg-a: #ffe3ec; --bg-b: #fff0f5; --bg-c: #ffe8d6;
+}
+html[data-theme='light'][data-bg='emerald-night'] {
+  --bg-a: #dff7ee; --bg-b: #eafaf3; --bg-c: #e6f7ff;
+}
+html[data-theme='light'][data-bg='graphite'] {
+  --bg-a: #e9ecf2; --bg-b: #f4f6fa; --bg-c: #eef1f6;
+}
+html[data-theme='light'][data-bg='dawn'] {
+  --bg-a: #ffe8d6; --bg-b: #ffeff0; --bg-c: #f7e6ff;
+}
+html[data-theme='light'][data-bg='ocean'] {
+  --bg-a: #dff0ff; --bg-b: #eaf7ff; --bg-c: #e6fbfa;
+}
+html[data-theme='light'][data-bg='forest'] {
+  --bg-a: #e2f7e9; --bg-b: #eefaf0; --bg-c: #e6f7ee;
+}
+
+/* ---------------- 液态玻璃文字渐变描边 ----------------
+   描边颜色取自当前渐变底色：左上最浅、右下最深；
+   切换底色（--bg-a/b/c）时描边颜色随之变化。 */
+:root {
+  --stroke-light: color-mix(in srgb, var(--bg-c) 52%, #ffffff 48%);
+  --stroke-mid: color-mix(in srgb, var(--bg-b) 70%, #dbe4ff 30%);
+  --stroke-dark: color-mix(in srgb, var(--bg-a) 62%, #000000 38%);
+}
+
+[data-theme='light'] {
+  --stroke-light: color-mix(in srgb, var(--bg-a) 45%, #ffffff 55%);
+  --stroke-mid: color-mix(in srgb, var(--bg-b) 70%, var(--bg-c) 30%);
+  --stroke-dark: color-mix(in srgb, var(--bg-c) 45%, #1a2340 55%);
+}
+
+/* 渐变描边文字：左上偏浅、右下偏深的描边，增强液态玻璃上的可读性 */
+.glass-text {
+  color: var(--fg);
+  text-shadow:
+    -1.4px -1.4px 0 var(--stroke-light),
+    -1.4px 0 0 var(--stroke-light),
+    0 -1.4px 0 var(--stroke-light),
+    -1px -1px 0 var(--stroke-light),
+    -1.4px 1.4px 0 var(--stroke-mid),
+    1.4px -1.4px 0 var(--stroke-mid),
+    -1.4px 0 0 var(--stroke-light),
+    0 -1.4px 0 var(--stroke-light),
+    1.4px 0 0 var(--stroke-dark),
+    0 1.4px 0 var(--stroke-dark),
+    1px 1px 0 var(--stroke-dark),
+    1.4px 1.4px 0 var(--stroke-dark);
+  -webkit-text-stroke: 0.35px var(--stroke-mid);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  color: var(--fg);
+  background: radial-gradient(circle at 12% 8%, var(--bg-c), transparent 45%),
+    radial-gradient(circle at 88% 92%, var(--bg-b), transparent 50%),
+    linear-gradient(160deg, var(--bg-a), var(--bg-b) 60%, var(--bg-c));
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 160, 220, 0.35);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(140, 160, 220, 0.55);
+}

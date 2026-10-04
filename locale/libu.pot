@@ -1,0 +1,47 @@
+# 吏部 (Libu) 翻译模板
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: libu 0.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/lemon-meng-meng/Libu/issues\n"
+"POT-Creation-Date: 2026-10-03 08:00+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+# 主界面
+msgid "主"
+msgstr ""
+
+msgid "设置"
+msgstr ""
+
+msgid "添加图片"
+msgstr ""
+
+msgid "打开输出目录"
+msgstr ""
+
+# 处理向导
+msgid "框选纸面范围"
+msgstr ""
+
+msgid "这一页是否进行 OCR 文字识别？"
+msgstr ""
+
+msgid "校正 OCR 文字"
+msgstr ""
+
+msgid "保存并输出"
+msgstr ""
+
+# 输出
+msgid "双层 PDF"
+msgstr ""
+
+msgid "Word（原图可复制）"
+msgstr ""
+
+msgid "Word（纯文本）"
+msgstr ""

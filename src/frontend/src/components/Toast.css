@@ -1,0 +1,35 @@
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 22px;
+  border-radius: 14px;
+  background: rgba(20, 30, 60, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 13px;
+  z-index: 300;
+  animation: toast-in 0.25s ease;
+  max-width: 80vw;
+}
+
+.toast--success {
+  border-color: rgba(124, 240, 200, 0.6);
+}
+
+.toast--error {
+  border-color: rgba(255, 107, 129, 0.7);
+  color: #ffd7de;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

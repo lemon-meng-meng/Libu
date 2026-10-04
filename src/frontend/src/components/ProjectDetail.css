@@ -1,0 +1,113 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 10, 26, 0.5);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  z-index: 150;
+  padding: 24px;
+}
+
+.project-detail {
+  width: min(780px, 92vw);
+  max-height: 86vh;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.project-detail__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-detail__head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.project-detail__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  overflow: auto;
+}
+
+.project-detail__preview img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.project-detail__ph {
+  height: 220px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--fg-dim);
+}
+
+.project-detail__outputs h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.output-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  margin-bottom: 8px;
+}
+
+.output-row__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.output-row__actions button,
+.output-row__actions a {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(110, 168, 255, 0.18);
+  border-radius: 9px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-detail__source {
+  font-size: 11px;
+  color: var(--fg-dim);
+  word-break: break-all;
+  margin-top: 10px;
+}
+
+.project-detail__foot {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-danger,
+.btn-ghost,
+.icon-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 9px 16px;
+}
+
+.btn-danger {
+  color: var(--danger);
+  border-color: rgba(255, 107, 129, 0.5);
+}
+
+.icon-btn {
+  padding: 6px 12px;
+}

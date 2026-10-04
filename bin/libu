@@ -1,0 +1,129 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+# 吏部 · Libu 启动器：启动本地服务并打开界面。
+# 用法：
+#   libu                     启动服务并打开界面
+#   libu --import <图片路径>  启动并直接进入该图片的处理向导
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# 解析参数（保留 --import）
+IMPORT_PATH=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --import)
+      IMPORT_PATH="${2:-}"
+      shift 2 || true
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+# 定位应用目录（源码树 或 安装后的 /opt/libu）
+if [ -d "$SCRIPT_DIR/../src/libu" ]; then
+  APP_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+elif [ -d "/opt/libu/src/libu" ]; then
+  APP_DIR="/opt/libu"
+elif [ -d "$SCRIPT_DIR/../share/libu/src/libu" ]; then
+  APP_DIR="$(cd "$SCRIPT_DIR/../share/libu" && pwd)"
+else
+  echo "无法定位吏部程序目录" >&2
+  exit 1
+fi
+
+PY="${LIBU_PYTHON:-python3}"
+if [ -x "$APP_DIR/venv/bin/python" ]; then
+  PY="$APP_DIR/venv/bin/python"
+fi
+
+export PYTHONPATH="$APP_DIR/src${PYTHONPATH:+:$PYTHONPATH}"
+if [ -z "${LIBU_WEB_DIR:-}" ]; then
+  if [ -d "$APP_DIR/web" ]; then export LIBU_WEB_DIR="$APP_DIR/web"; fi
+fi
+
+PORT="${LIBU_PORT:-8756}"
+HOST="${LIBU_HOST:-127.0.0.1}"
+
+port_open() {
+  "$PY" - "$HOST" "$PORT" <<'EOF' 2>/dev/null
+import socket, sys
+s = socket.socket()
+s.settimeout(0.5)
+try:
+    s.connect((sys.argv[1], int(sys.argv[2])))
+    code = 0
+except Exception:
+    code = 1
+finally:
+    s.close()
+sys.exit(code)
+EOF
+}
+
+SERVER_PID=""
+TRAY_PID=""
+cleanup() {
+  [ -n "$TRAY_PID" ] && kill "$TRAY_PID" 2>/dev/null || true
+  [ -n "$SERVER_PID" ] && kill "$SERVER_PID" 2>/dev/null || true
+}
+trap cleanup EXIT INT TERM
+
+# 若端口已被吏部占用，则复用已有服务，不再重复启动
+if port_open; then
+  echo "吏部服务已在运行：http://$HOST:$PORT/"
+else
+  "$PY" -m libu serve --host "$HOST" --port "$PORT" &
+  SERVER_PID=$!
+  for _ in $(seq 1 80); do
+    if port_open; then break; fi
+    sleep 0.25
+  done
+fi
+
+# 构造打开地址（支持从文件管理器直接导入）
+URL="http://$HOST:$PORT/"
+if [ -n "$IMPORT_PATH" ] && [ -e "$IMPORT_PATH" ]; then
+  ENC="$("$PY" -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.argv[1]))' "$IMPORT_PATH")"
+  URL="$URL?import=$ENC"
+fi
+
+# 启动托盘助手（截屏 OCR）——使用系统 python3 以访问 GTK
+TRAY_AUTOSTART=1
+SETTINGS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/libu/settings.json"
+if [ -f "$SETTINGS_FILE" ]; then
+  TRAY_AUTOSTART="$("$PY" -c "import json;d=json.load(open('$SETTINGS_FILE'));print(1 if d.get('screenshot_autostart', True) else 0)" 2>/dev/null || echo 1)"
+fi
+if [ "${LIBU_TRAY:-1}" != "0" ] && [ "$TRAY_AUTOSTART" = "1" ] && [ -f "$APP_DIR/bin/libu-tray" ]; then
+  LIBU_PORT="$PORT" "$APP_DIR/bin/libu-tray" >/dev/null 2>&1 &
+  TRAY_PID=$!
+fi
+
+OPENED=0
+if [ "${LIBU_NO_BROWSER:-0}" != "1" ]; then
+  # 1) 优先使用原生窗口（WebKitGTK），实现不依赖浏览器的独立运行
+  if [ -x "$APP_DIR/bin/libu-window" ] && command -v python3 >/dev/null 2>&1; then
+    if [ "${LIBU_WINDOW:-1}" != "0" ]; then
+      if python3 "$APP_DIR/bin/libu-window" "$URL" "吏部 · Libu"; then
+        OPENED=1
+      fi
+    fi
+  fi
+  # 2) 回退：用系统默认浏览器打开
+  if [ "$OPENED" != "1" ]; then
+    if command -v xdg-open >/dev/null 2>&1; then
+      xdg-open "$URL" >/dev/null 2>&1 || true
+    elif command -v gio >/dev/null 2>&1; then
+      gio open "$URL" >/dev/null 2>&1 || true
+    fi
+  fi
+fi
+
+echo "吏部已启动：$URL"
+
+# 原生窗口关闭即退出应用；浏览器/无界面模式则保持服务前台运行
+if [ "$OPENED" != "1" ] && [ -n "$SERVER_PID" ]; then
+  wait "$SERVER_PID"
+fi

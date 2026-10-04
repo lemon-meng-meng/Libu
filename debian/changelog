@@ -1,0 +1,39 @@
+libu (0.4.0) unstable; urgency=medium
+
+  * 批量扫描：一次导入多张图片合成多页 PDF / Word，可拖拽调整页面顺序
+  * 液态玻璃文字新增渐变描边，随底色变化，右键菜单文字清晰可读
+  * 提供商连通性测试与模型自动检测：Ollama / LM Studio / OpenAI 兼容服务
+    可自动拉取并保存多个模型
+  * 新增在线供应商「PaddleOCR 在线（飞桨星河）」
+  * 随附 PP-OCRv5 ONNX 一键导入包 paddleocr_ppocrv5.zip
+  * 修复截屏 OCR 快捷键无响应（Electron 屏幕捕获授权 + GTK 全局快捷键）
+
+ -- lemon-meng-meng <https://github.com/lemon-meng-meng/Libu>  Sun, 04 Oct 2026 08:30:00 +0800
+
+libu (0.3.0) unstable; urgency=medium
+
+  * 新增 OCR 图片查看器：像微信一样框选复制图中文字，记忆打开过的图片
+  * 新增截屏 OCR：托盘区域截屏识别，结果进入可编辑剪贴板
+  * 每个功能可独立选择 OCR 供应商（文档扫描仪 / 图片查看器 / 截屏 OCR）
+  * 新增多种渐变底色预设；修复液态玻璃内容被边缘遮挡的问题
+  * 使用系统 WebKitGTK 原生窗口，无需浏览器即可独立运行
+
+ -- lemon-meng-meng <https://github.com/lemon-meng-meng/Libu>  Sat, 03 Oct 2026 14:00:00 +0800
+
+libu (0.2.1) unstable; urgency=medium
+
+  * 修复 OCR 校正后输出格式失效、Agent 无法启用、框选默认范围错误等缺陷
+  * 补充 Nautilus 右键菜单、本地化目录、发行元数据与安装脚本
+
+ -- lemon-meng-meng <https://github.com/lemon-meng-meng/Libu>  Sat, 03 Oct 2026 08:00:00 +0800
+
+libu (0.2.0) unstable; urgency=medium
+
+  * 完整实现双层 PDF / Word 生成（不可见文字层精确覆盖）
+  * 多 OCR 引擎框架：本地模型 / 在线 API / 大模型 / Agent
+  * 微信 OCR 模型导入支持
+  * 液态玻璃 UI、暗色/亮色/跟随系统主题
+  * 最近项目块状/条状显示、右键隐藏与删除
+  * Deb / AppImage / Windows / Loongarch 打包脚本
+
+ -- lemon-meng-meng <https://github.com/lemon-meng-meng/Libu>  Fri, 02 Oct 2026 12:00:00 +0800

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+if [ -x /usr/bin/gtk-update-icon-cache ] && [ -d /usr/share/icons/hicolor ]; then
+  gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor || true
+fi
+if command -v update-desktop-database >/dev/null 2>&1; then
+  update-desktop-database -q /usr/share/applications || true
+fi
+echo "吏部已安装。运行 libu-app 启动；输出目录 ~/文档/吏部"
+exit 0

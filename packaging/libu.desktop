@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=吏部
+Name[en]=Libu
+GenericName=图片转电子文档 / 图片查看器
+GenericName[en]=Image to Document / Image Viewer
+Comment=将图片扫描件转换为可搜索的双层 PDF / Word，并可作为 OCR 图片查看器
+Exec=libu-app --import %f
+Icon=libu
+Terminal=false
+Categories=Graphics;Office;Scanning;Viewer;
+MimeType=image/jpeg;image/png;image/bmp;image/gif;image/tiff;image/webp;image/x-icon;image/avif;image/heic;image/jp2;
+Keywords=OCR;PDF;Word;扫描;文档;图片查看;
+StartupNotify=true

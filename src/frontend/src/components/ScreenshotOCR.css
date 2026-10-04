@@ -1,0 +1,178 @@
+.shot-view {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 30px 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.shot-view__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.shot-view__title {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 3px;
+}
+
+.shot-view__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.shot-view__body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.shot-panel,
+.shot-history {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  overflow: hidden;
+}
+
+.shot-panel__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.shot-panel__head h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.shot-panel__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.shot-clipboard {
+  flex: 1;
+  min-height: 0;
+  resize: none;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 14px;
+  line-height: 1.7;
+  outline: none;
+}
+
+.shot-history__list {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shot-history__item {
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--fg);
+}
+
+.shot-history__item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.shot-history__time {
+  font-size: 10px;
+  color: var(--fg-dim);
+}
+
+.shot-history__text {
+  font-size: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.shot-busy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(4, 8, 20, 0.45);
+  border-radius: inherit;
+  backdrop-filter: blur(3px);
+}
+
+/* ---------------- 应用内框选 ---------------- */
+.region-cropper {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(4, 8, 20, 0.9);
+  display: flex;
+  flex-direction: column;
+}
+
+.region-cropper__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.region-cropper__bar span {
+  flex: 1;
+  color: var(--fg-dim);
+}
+
+.region-cropper__stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 16px;
+}
+
+.region-cropper__stage img {
+  display: block;
+  max-width: 92vw;
+  max-height: 78vh;
+  cursor: crosshair;
+  user-select: none;
+}
+
+.region-cropper__rect {
+  position: absolute;
+  border: 2px solid #6ea8ff;
+  background: rgba(110, 168, 255, 0.22);
+  pointer-events: none;
+}

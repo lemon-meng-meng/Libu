@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+# 吏部 · 截屏 OCR 托盘启动器（使用系统 python3 以访问 GTK / AppIndicator）
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [ -d "$SCRIPT_DIR/../src/libu" ]; then
+  APP_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+elif [ -d "/opt/libu/src/libu" ]; then
+  APP_DIR="/opt/libu"
+elif [ -d "$SCRIPT_DIR/../share/libu/src/libu" ]; then
+  APP_DIR="$(cd "$SCRIPT_DIR/../share/libu" && pwd)"
+else
+  echo "无法定位吏部程序目录" >&2
+  exit 1
+fi
+
+PY="${LIBU_SYSTEM_PYTHON:-python3}"
+export PYTHONPATH="$APP_DIR/src${PYTHONPATH:+:$PYTHONPATH}"
+exec "$PY" -m libu.tray_helper "$@"

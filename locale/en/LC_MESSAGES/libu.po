@@ -1,0 +1,46 @@
+# Libu English translation
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: libu 0.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/lemon-meng-meng/Libu/issues\n"
+"POT-Creation-Date: 2026-10-03 08:00+0800\n"
+"PO-Revision-Date: 2026-10-03 08:00+0800\n"
+"Last-Translator: lemon-meng-meng\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "主"
+msgstr "Home"
+
+msgid "设置"
+msgstr "Settings"
+
+msgid "添加图片"
+msgstr "Add images"
+
+msgid "打开输出目录"
+msgstr "Open output folder"
+
+msgid "框选纸面范围"
+msgstr "Select page area"
+
+msgid "这一页是否进行 OCR 文字识别？"
+msgstr "Run OCR on this page?"
+
+msgid "校正 OCR 文字"
+msgstr "Review OCR text"
+
+msgid "保存并输出"
+msgstr "Save & export"
+
+msgid "双层 PDF"
+msgstr "Searchable PDF"
+
+msgid "Word（原图可复制）"
+msgstr "Word (image + copyable text)"
+
+msgid "Word（纯文本）"
+msgstr "Word (plain text)"

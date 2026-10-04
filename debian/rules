@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+# SPDX-License-Identifier: GPL-3.0-or-later
+%:
+	dh $@
+
+override_dh_auto_build:
+	# 构建前端（若可用）
+	if command -v npm >/dev/null 2>&1; then \
+	  cd src/frontend && npm install --no-audit --no-fund && npm run build || true; \
+	fi
+
+override_dh_auto_install:
+	install -d debian/libu/opt/libu debian/libu/usr/bin \
+	  debian/libu/usr/share/applications \
+	  debian/libu/usr/share/icons/hicolor/256x256/apps
+	cp -r src debian/libu/opt/libu/src
+	install -d debian/libu/opt/libu/web
+	if [ -d src/frontend/dist ]; then cp -r src/frontend/dist/. debian/libu/opt/libu/web/; fi
+	cp -r data debian/libu/opt/libu/data
+	cp -r bin debian/libu/opt/libu/bin
+	cp requirements.txt README.md LICENSE debian/libu/opt/libu/ 2>/dev/null || true
+	install -m 0755 bin/libu debian/libu/usr/bin/libu
+	install -m 0755 bin/libu-app debian/libu/usr/bin/libu-app
+	install -m 0644 packaging/libu.desktop debian/libu/usr/share/applications/libu.desktop
+	install -m 0644 data/icons/libu_256.png debian/libu/usr/share/icons/hicolor/256x256/apps/libu.png
+
+override_dh_auto_clean:
+	rm -rf src/frontend/dist src/frontend/node_modules

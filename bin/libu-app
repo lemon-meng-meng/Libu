@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+# 吏部 · Libu 桌面启动器：优先使用 Electron 外壳，否则回退到浏览器模式。
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# 打包后的 Electron 可执行文件（若存在）
+for CAND in "$SCRIPT_DIR/../libu-electron/libu" "$SCRIPT_DIR/../electron/libu" "/opt/libu/libu-electron/libu"; do
+  if [ -x "$CAND" ]; then
+    exec "$CAND" "$@"
+  fi
+done
+
+exec "$SCRIPT_DIR/libu" "$@"

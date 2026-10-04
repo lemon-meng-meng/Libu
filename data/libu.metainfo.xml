@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.lemon.libu</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>吏部</name>
+  <name xml:lang="en">Libu</name>
+  <summary>图片、扫描件转可搜索的电子 PDF / Word</summary>
+  <summary xml:lang="en">Convert photos and scans into searchable PDF / Word documents</summary>
+  <description>
+    <p>
+      吏部是一款本地优先的“图片转电子文档”工具。它把拍摄或扫描的纸面照片
+      经过纠偏、去阴影、白底增强后，生成类似扫描仪的电子文档。
+    </p>
+    <p>
+      支持双层 PDF（原图 + 不可见可复制文字层）、两种 Word 输出，
+      以及可插拔的 OCR 引擎：本地模型（Tesseract、PaddleOCR / PP-OCRv5、
+      PaddleOCR-VL、Microsoft、微信 OCR、ONNX 自定义模型等）、在线 OCR
+      （OCR.space、百度云）、大模型 API 与本地 AI 助手。
+    </p>
+    <p>所有数据默认只保存在本机，处理结果输出到 ~/文档/吏部。</p>
+  </description>
+  <launchable type="desktop-id">libu.desktop</launchable>
+  <categories>
+    <category>Graphics</category>
+    <category>Office</category>
+    <category>Scanning</category>
+  </categories>
+  <keywords>
+    <keyword>OCR</keyword>
+    <keyword>PDF</keyword>
+    <keyword>Word</keyword>
+    <keyword>scan</keyword>
+    <keyword>扫描</keyword>
+  </keywords>
+  <url type="homepage">https://github.com/lemon-meng-meng/Libu</url>
+  <releases>
+    <release version="0.3.0" date="2026-10-03"/>
+    <release version="0.2.1" date="2026-10-03"/>
+    <release version="0.2.0" date="2026-10-02"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+</component>

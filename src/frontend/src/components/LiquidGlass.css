@@ -1,0 +1,74 @@
+.liquid-glass {
+  position: relative;
+  border-radius: var(--lg-radius, 22px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, calc(var(--lg-tint, 0.1) + 0.06)),
+    rgba(255, 255, 255, calc(var(--lg-tint, 0.1) * 0.5))
+  );
+  backdrop-filter: blur(var(--lg-blur, 18px)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--lg-blur, 18px)) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 8px 32px rgba(3, 8, 26, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  /* 关键：不再裁切内容，避免文字/按钮被玻璃边缘遮住 */
+  overflow: visible;
+  isolation: isolate;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+[data-theme='light'] .liquid-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, calc(var(--lg-tint, 0.1) + 0.5)),
+    rgba(255, 255, 255, calc(var(--lg-tint, 0.1) + 0.28))
+  );
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 10px 30px rgba(31, 45, 90, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.liquid-glass__sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+      120% 80% at 10% 0%,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0) 42%
+    ),
+    radial-gradient(
+      90% 70% at 100% 100%,
+      rgba(120, 190, 255, 0.14) 0%,
+      rgba(120, 190, 255, 0) 60%
+    );
+  opacity: 0.55;
+}
+
+.liquid-glass__content {
+  display: contents;
+}
+
+/* 让玻璃容器上的 flex/grid 布局直接作用于内容子元素，并确保内容盖在高光层之上 */
+.liquid-glass > *:not(.liquid-glass__sheen) {
+  position: relative;
+  z-index: 1;
+}
+
+.liquid-glass.is-interactive,
+.liquid-glass.clickable {
+  cursor: pointer;
+}
+
+.liquid-glass.is-interactive:hover,
+.liquid-glass.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 40px rgba(3, 8, 26, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}

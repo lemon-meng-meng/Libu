@@ -1,0 +1,16 @@
+Source: libu
+Section: graphics
+Priority: optional
+Maintainer: lemon-meng-meng <https://github.com/lemon-meng-meng/Libu>
+Build-Depends: debhelper-compat (= 13), python3, python3-venv, nodejs, npm
+Standards-Version: 4.6.2
+Homepage: https://github.com/lemon-meng-meng/Libu
+
+Package: libu
+Architecture: all
+Depends: ${misc:Depends}, python3, python3-venv, python3-gi, gir1.2-gtk-3.0, gir1.2-webkit2-4.1
+Recommends: tesseract-ocr, tesseract-ocr-chi-sim, gir1.2-appindicator3-0.1, python3-xlib, gir1.2-keybinder-3.0
+Description: 吏部 Libu - 图片转电子文档工具
+ 将图片 / 扫描件转换为可搜索的双层 PDF 与 Word。
+ 支持多种本地 OCR 模型、在线 OCR 引擎、大模型 API 与本地 AI 助手。
+ 处理结果默认保存到 ~/文档/吏部。
